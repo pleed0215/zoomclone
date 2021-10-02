@@ -9,6 +9,16 @@ html(lang="en")
     body 
         header 
             h1 Zoom Cloning
-        main 
-            h2 Welcome!
+        main
+            div
+                p Participants
+                ul#participants
+            form#nickname-form
+                label#nickname-label(for="nickname-input")
+                input#nickname-input(type="text", placeholder="Choose your nickname", required)
+                button Save 
+            ul#message-list
+            form#message-form
+                input#message-input(type="text", placeholder="Write a message", required)
+                button Send
         script(src="public/js/app.js")
