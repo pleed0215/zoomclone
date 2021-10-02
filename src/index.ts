@@ -20,7 +20,7 @@ let participants: string[] = [];
 
 wss.on("connection", (socket) => {
   sockets.push(socket);
-  socket.on("close", () => {
+  socket.on("close", (message) => {
     const index = sockets.findIndex((s) => s === socket);
     if (index !== -1) {
       sockets.splice(index);
