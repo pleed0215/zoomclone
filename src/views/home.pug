@@ -10,15 +10,18 @@ html(lang="en")
         header 
             h1 Zoom Cloning
         main
-            div
-                p Participants
-                ul#participants
-            form#nickname-form
-                label#nickname-label(for="nickname-input")
-                input#nickname-input(type="text", placeholder="Choose your nickname", required)
-                button Save 
-            ul#message-list
-            form#message-form
-                input#message-input(type="text", placeholder="Write a message", required)
-                button Send
-        script(src="public/js/app.js")
+            div#welcome
+                form#room-form
+                    label(for="room-name") Room Name
+                    input#room-name(value="Default", placeholder="Room name", required, type="text")
+                    label(for="room-nick") Nickname
+                    input#room-nick(value="DefaultNick", placeholder="Nickname for chat", required, type="text")
+                    button Enter Room
+            div#chat-container
+                ul#messages
+                form#message-form
+                    input(placeholder="Write messages here", required, type="text")
+                    button Send
+
+        script(src="/socket.io/socket.io.js")
+        script(src="/public/js/app.js")

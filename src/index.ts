@@ -1,6 +1,5 @@
 import http from "http";
 import express from "express";
-import WebSocket from "ws";
 import SocketIO from "socket.io"
 
 const app = express();
@@ -15,6 +14,27 @@ app.get("/*", (req, res) => res.redirect("/"));
 const httpServer = http.createServer(app);
 const io = new SocketIO.Server(httpServer);
 
+io.on("connection", (socket)=> {
+
+  socket.on("enter_room", (roomName, nick, done) => {
+    if(roomName !== null || roomName !== "") {
+      socket.join(roomName);
+      done(nick);
+      socket.to(roomName).emit("joined", nick);
+    }
+  });
+
+  socket.on("send_message", (roomName, nickname, msg, done) => {
+    if(roomName && msg) {
+      socket.to(roomName).emit('receive', nickname, msg)
+      done(msg);
+    }
+  });
+
+  socket.on("disconnecting", () => {
+    socket.rooms.forEach( room => socket.to(room).emit("receive", "Disconnecting", `${socket.id} left`));
+  })
+})
 
 /*
 wss.on("connection", (socket) => {
