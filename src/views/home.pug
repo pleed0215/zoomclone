@@ -10,22 +10,9 @@ html(lang="en")
         header 
             h1 Zoom Cloning
         main
-            div#welcome
+            div
                 section
-                    aside
-                        h3#header-room-list__title Room List
-                        ul#header-room-list
-                form#room-form
-                    label(for="room-name") Room Name
-                    input#room-name(value="Default", placeholder="Room name", required, type="text")
-                    label(for="room-nick") Nickname
-                    input#room-nick(value="DefaultNick", placeholder="Nickname for chat", required, type="text")
-                    button Enter Room
-            div#chat-container
-                ul#messages
-                form#message-form
-                    input(placeholder="Write messages here", required, type="text")
-                    button Send
+                    video#my-face(autoplay, playsinline, width="400", height="400")
 
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")
