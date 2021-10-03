@@ -18,27 +18,24 @@ interface ExtendedSocket extends Socket {
   nickname?: string;
 }
 
-const countRoom = ():number => {
+// Get public room list.
+const getRoom = ():string[] => {
   const {sids, rooms} = io.sockets.adapter;
-  let count = 0;
-  rooms.forEach((_, key) => sids.get(key) !== undefined && count++);
-  return count;
+  let roomList:string[] = []
+  rooms.forEach((_, key) => sids.get(key) !== undefined && roomList.push(key));
+  return roomList;
 }
 
+// Start to connect
 io.on("connection", (socket)=> {
-  const extended = <ExtendedSocket>socket;
-  extended["nickname"] = "Anon";
-
-  socket.onAny(() => {
-
-  });
 
   socket.on("enter_room", (roomName, nick, done) => {
     if(roomName !== null || roomName !== "") {
       socket.join(roomName);
+      (socket as ExtendedSocket).nickname = nick;
       done(nick);
-      console.log(countRoom());
       socket.to(roomName).emit("joined", nick);
+
     }
   });
 

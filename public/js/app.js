@@ -4,13 +4,14 @@ const roomForm = document.getElementById("room-form");
 const chatContainer = document.getElementById("chat-container");
 const messages = document.getElementById("messages");
 const messageForm = document.getElementById("message-form");
+const roomListHeader = document.getElementById("header-room-list__title");
+const roomList = document.getElementById("header-room-list");
 
 let chatRoomName = "";
 let nickname = "DefaultName-" + Math.ceil(Math.random()*1000);
 let participants = [];
 
 socket.on("joined", (nick) => {
-    console.log("???");
     if(nick) {
         messageAdd(`${nick} joined room.`)
     }
@@ -37,10 +38,10 @@ function onSendMessageReturned(msg) {
 }
 
 function onConnected() {
-    console.log(socket.nickname);
+    console.log(socket);
     welcome.style.display = "none";
     chatContainer.style.visibility = "visible";
-    messageAdd("You joined chat room")
+    messageAdd("You've joined chat room")
 }
 
 function handleSubmitRoom(event) {
