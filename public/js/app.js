@@ -37,6 +37,7 @@ function onSendMessageReturned(msg) {
 }
 
 function onConnected() {
+    console.log(socket.nickname);
     welcome.style.display = "none";
     chatContainer.style.visibility = "visible";
     messageAdd("You joined chat room")

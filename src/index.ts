@@ -1,6 +1,6 @@
 import http from "http";
 import express from "express";
-import SocketIO from "socket.io"
+import SocketIO, { Socket} from "socket.io"
 
 const app = express();
 
@@ -14,12 +14,30 @@ app.get("/*", (req, res) => res.redirect("/"));
 const httpServer = http.createServer(app);
 const io = new SocketIO.Server(httpServer);
 
+interface ExtendedSocket extends Socket {
+  nickname?: string;
+}
+
+const countRoom = ():number => {
+  const {sids, rooms} = io.sockets.adapter;
+  let count = 0;
+  rooms.forEach((_, key) => sids.get(key) !== undefined && count++);
+  return count;
+}
+
 io.on("connection", (socket)=> {
+  const extended = <ExtendedSocket>socket;
+  extended["nickname"] = "Anon";
+
+  socket.onAny(() => {
+
+  });
 
   socket.on("enter_room", (roomName, nick, done) => {
     if(roomName !== null || roomName !== "") {
       socket.join(roomName);
       done(nick);
+      console.log(countRoom());
       socket.to(roomName).emit("joined", nick);
     }
   });
