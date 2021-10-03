@@ -1,7 +1,7 @@
 import http from "http";
 import express from "express";
 import WebSocket from "ws";
-import { decode } from "querystring";
+import SocketIO from "socket.io"
 
 const app = express();
 
@@ -13,19 +13,18 @@ app.get("/", (req, res) => res.render("home"));
 app.get("/*", (req, res) => res.redirect("/"));
 
 const httpServer = http.createServer(app);
-const wss = new WebSocket.Server({ server: httpServer });
+const io = new SocketIO.Server(httpServer);
 
-const sockets: WebSocket[] = [];
-let participants: string[] = [];
 
+/*
 wss.on("connection", (socket) => {
   sockets.push(socket);
   socket.on("close", (message) => {
     const index = sockets.findIndex((s) => s === socket);
     if (index !== -1) {
       sockets.splice(index);
+      console.log("Disconnected from client");
     }
-    console.log("Disconnected from client");
   });
   socket.on("message", (message) => {
     const decoded = JSON.parse(message.toString());
@@ -81,7 +80,10 @@ wss.on("connection", (socket) => {
     }
   });
 });
+*/
 
 httpServer.listen(3000, () => {
   console.info("🐶 Http & Ws start at port 3000");
 });
+
+
