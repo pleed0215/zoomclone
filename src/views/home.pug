@@ -12,7 +12,12 @@ html(lang="en")
         main
             div
                 section
-                    video#my-face(autoplay, playsinline, width="400", height="400")
+                    aside(style="width: 450px; display: flex; flex-direction: column; align-items: center")
+                        video#my-face(autoplay, playsinline, width="400", height="400")
+                        div(style="display: flex; flex-direction: column; align-items: center")
+                            select#my-face__select-camera(style="width: 400px;")
+                            button#my-face__mute(style="width: 200px;") Mute
+                            button#my-face__toggle-camera(style="width: 200px;") Turn camera off
 
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")
