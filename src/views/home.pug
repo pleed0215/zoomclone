@@ -10,7 +10,11 @@ html(lang="en")
         header 
             h1 Zoom Cloning
         main
-            div
+            div#room-container
+                form#room-container__form
+                    input(type="text", placeholder="Write room name", required)
+                    button Connect or Create room
+            div#call-container
                 section
                     aside(style="width: 450px; display: flex; flex-direction: column; align-items: center")
                         video#my-face(autoplay, playsinline, width="400", height="400")

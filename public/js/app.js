@@ -2,6 +2,10 @@ const myFace = document.getElementById("my-face");
 const btnMute= document.getElementById("my-face__mute");
 const btnToggleCamera = document.getElementById("my-face__toggle-camera")
 const selectCamera = document.getElementById("my-face__select-camera");
+const roomConnectContainer = document.getElementById("room-container");
+const roomForm = document.getElementById("room-container__form");
+const callContainer = document.getElementById("call-container");
+
 
 let isMute = false;
 let prevVolume = 0.1;
@@ -11,6 +15,11 @@ let isCameraOff = false;
 const socket = io();
 
 let myStream = null;
+
+function startMedia() {
+    roomConnectContainer.hidden = false;
+    callContainer.hidden = true;
+}
 
 function onClickMute() {
     let innerText = isMute ? "Unmute" : "Mute";
@@ -27,7 +36,6 @@ function onClickToggleCmaera() {
     btnToggleCamera.innerText = innerText;
 
 }
-
 
 async function getCameras() {
     try {
@@ -54,7 +62,6 @@ async function setCameraSelect() {
                 (camera, index) => {
                     const option = document.createElement("option");
                     const currentCamera = myStream?.getVideoTracks()[0];
-
                     option.value = camera.deviceId;
                     option.label = camera.label;
                     if(currentCamera) {
@@ -109,7 +116,6 @@ async function getMedia() {
             myFace.volume = prevVolume;
             myFace.play();
         }
-
     } catch(err) {
         alert(err);
     }
@@ -117,7 +123,8 @@ async function getMedia() {
 
 window.addEventListener("load", async function(event) {
     try {
-        await getMedia();
+        startMedia();
+        //await getMedia();
     } catch (e) {
         console.log(e);
     }
@@ -132,3 +139,4 @@ navigator.mediaDevices.addEventListener("devicechange", async () => {
 selectCamera.addEventListener("change", async function (event) {
     await updateStream(event.target.value);
 })
+
