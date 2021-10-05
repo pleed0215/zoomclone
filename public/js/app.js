@@ -1,7 +1,11 @@
+// form elements.
 const formEnterRoom = document.getElementById("enter-room__form");
 const enterRoomMessage = document.getElementById("enter-room__message");
 const nickname = formEnterRoom.querySelector("input[name='nickname']");
 const roomName = formEnterRoom.querySelector("input[name='room-name']");
+
+// chat container elements.
+const container = document.getElementById("container");
 
 const socket = io();
 
@@ -26,7 +30,7 @@ socket.on("joined", () => {
 // Socket codes
 function nicknames(nicknames) {
     if(nicknames.findIndex(nick => nick === nickname.value) !== -1) {
-        enterRoomMessage.innerText += "이미 존재하는 닉네임입니다."
+        enterRoomMessage.innerText = "이미 존재하는 닉네임입니다."
         return;
     }
 
@@ -34,6 +38,7 @@ function nicknames(nicknames) {
 }
 
 function afterEnterRoom() {
-    formEnterRoom.hidden = true;
+    formEnterRoom.classList.add("hidden");
+    container.classList.remove("hidden");
 }
 

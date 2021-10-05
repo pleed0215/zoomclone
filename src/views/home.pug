@@ -6,15 +6,28 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css")
         title Document
-    body 
+    body.flex.flex-col.items-center
         header
             h1(class="text-2xl text-left sm:text-center mt-4 font-bold mb-4") Welcome to Noom
-        main.px-4.flex.justify-center
-            form#enter-room__form(class="w-full sm:max-w-md border rounded p-4 mb-2")
-                input.w-full.p-2.border.rounded.outline-none.mb-2(name="nickname", type="text",  placeholder="닉네임을 입력해주세요.")
-                input.w-full.p-2.border.rounded.outline-none.mb-2(name="room-name", type="text",  placeholder="방 이름을 입력해주세요.")
+        main(class="w-full max-w-screen-sm sm:max-w-md p-4 mb-2")
+            form#enter-room__form.p-4.border.rounded.flex.flex-col.shadow-sm
+                div
+                    label.text-sm(for="nickname") 닉네임
+                    input.w-full.p-2.border.rounded.outline-none.mb-2(name="nickname", type="text",  placeholder="닉네임을 입력해주세요.")
+                div
+                    label.text-sm(for="room-name") 방이름
+                    input.w-full.p-2.border.rounded.outline-none.mb-2(name="room-name", type="text",  placeholder="방 이름을 입력해주세요.")
                 button(class="text-white w-full p-2 border rounded bg-blue-600 hover:bg-blue-500 transition duration-300") 방 들어가기
-                p#enter-room__message(class="italic text-red-700")
+                p#enter-room__message(class="italic text-red-700") &nbsp;
+            div#container.flex.flex-col.items-center.hidden.border.rounded.w-full.p-4
+                div.relative.w-60.h-60.mb-8
+                    video#peer-face.w-60.h-60.border.rounded.overflow-hidden.bg-red-200.z-0
+                    video#my-face.absolute.w-20.h-20.border.rounded.overflow-hidden.top-1.right-1.bg-blue-200.z-10
+                div#chat-list.w-full.h-40.overflow-y-scroll.border.rounded.mb-2
+                form.w-full.border.rounded.flex
+                    input.w-full.outline-none.p-2.mr-2(type="text", name="chat")
+                    button.bg-red-100.w-20.p-2.rounded 보내기
+
 
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")
