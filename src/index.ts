@@ -26,10 +26,32 @@ const getRoom = (): string[] => {
     return roomList;
 }
 
+const getNicknames = (): string[] => {
+    try {
+        const nicknames:string[] = [];
+        const sockets = io.sockets.sockets;
+        sockets.forEach( (socket, _) => {
+            const nickname = (socket as ExtendedSocket)?.nickname;
+            if(nickname) {
+                nicknames.push(nickname);
+            }
+        });
+        return nicknames;
+    } catch (e) {
+        console.log(e);
+        return [];
+    }
+}
+
 // Start to connect
 io.on("connection", (socket) => {
-    socket.on('enter_room', (roomName, nickname) => {
+    socket.on("request_nicknames", (fn) => {
+        fn(getNicknames());
+    });
+    socket.on('enter_room', (roomName, nickname, afterEnterRoom) => {
         socket.join(roomName);
+        (socket as ExtendedSocket).nickname = nickname;
+        afterEnterRoom();
         socket.to(roomName).emit("joined")
     });
     socket.on("offer", (offer, roomName) => {

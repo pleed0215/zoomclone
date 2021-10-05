@@ -10,7 +10,11 @@ html(lang="en")
         header
             h1(class="text-2xl text-left sm:text-center mt-4 font-bold mb-4") Welcome to Noom
         main.px-4.flex.justify-center
-            div(class="w-full sm:max-w-md border rounded p-4")
-                input#
+            form#enter-room__form(class="w-full sm:max-w-md border rounded p-4 mb-2")
+                input.w-full.p-2.border.rounded.outline-none.mb-2(name="nickname", type="text",  placeholder="닉네임을 입력해주세요.")
+                input.w-full.p-2.border.rounded.outline-none.mb-2(name="room-name", type="text",  placeholder="방 이름을 입력해주세요.")
+                button(class="text-white w-full p-2 border rounded bg-blue-600 hover:bg-blue-500 transition duration-300") 방 들어가기
+                p#enter-room__message(class="italic text-red-700")
+
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")
