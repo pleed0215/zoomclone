@@ -64,6 +64,7 @@ async function setCameraSelect() {
         const option = document.createElement("option");
         const currentCamera = myStream?.getVideoTracks()[0];
         option.value = camera.deviceId;
+        console.log(camera);
         option.label = camera.label;
         option.innerText = camera.label;
         if (currentCamera) {
@@ -87,6 +88,8 @@ async function updateStream(deviceId) {
         deviceId,
         facingMode: "user",
         aspectRatio: 1,
+        width: 300,
+        height: 300,
       },
     });
     myFace.srcObject = myStream;
@@ -99,6 +102,8 @@ async function updateStream(deviceId) {
           deviceId: cameras[0].deviceId,
           facingMode: "user",
           aspectRatio: 1,
+          width: 300,
+          height: 300,
         },
       });
       myFace.srcObject = myStream;
