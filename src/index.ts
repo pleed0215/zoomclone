@@ -48,11 +48,19 @@ io.on("connection", (socket) => {
     socket.on("request_nicknames", (fn) => {
         fn(getNicknames());
     });
-    socket.on('enter_room', (roomName, nickname, afterEnterRoom) => {
+    socket.on("check_room", (roomName, fn) => {
+        const room =  io.sockets.adapter.rooms.get(roomName);
+        fn(!room || room.size === 1);
+    });
+
+    socket.on('enter_room', async (roomName, nickname, afterEnterRoom) => {
         socket.join(roomName);
         (socket as ExtendedSocket).nickname = nickname;
-        afterEnterRoom();
-        socket.to(roomName).emit("joined")
+        const allSockets = await socket.to(roomName).fetchSockets();
+        // @ts-ignore
+        const allNicknames = allSockets.map( socket => socket.nickname);
+        afterEnterRoom(allNicknames);
+        socket.to(roomName).emit("joined", nickname);
     });
     socket.on("offer", (offer, roomName) => {
         socket.to(roomName).emit("offer_send", offer);
@@ -65,6 +73,7 @@ io.on("connection", (socket) => {
     socket.on("ice", (candidate, roomName) => {
         socket.to(roomName).emit("ice_send", candidate);
     });
+
 });
 
 

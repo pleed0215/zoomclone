@@ -19,17 +19,20 @@ html(lang="en")
                     input.w-full.p-2.border.rounded.outline-none.mb-2(name="room-name", type="text",  placeholder="방 이름을 입력해주세요.")
                 button(class="text-white w-full p-2 border rounded bg-blue-600 hover:bg-blue-500 transition duration-300") 방 들어가기
                 p#enter-room__message(class="italic text-red-700") &nbsp;
-            div#container.flex.flex-col.items-center.hidden.border.rounded.w-full.p-4
-                div.relative.w-60.h-60.mb-8
-                    video#peer-face.w-60.h-60.border.rounded.overflow-hidden.bg-red-200.z-0
-                    video#my-face.absolute.w-20.h-20.border.rounded.overflow-hidden.top-1.right-1.bg-blue-200.z-10
-                select#camera-list
+            div#container.flex.flex-col.items-center.hidden.border.rounded.w-full.p-4.shadow-lg
+                div.relative.w-60.h-60.mb-2
+                    video#peer-face.w-60.h-60.border.rounded.overflow-hidden.bg-red-200.z-10
+                    video#my-face.absolute.w-20.h-20.border.rounded.overflow-hidden.top-1.right-1.bg-blue-200.z-20
+                div.w-60.flex.flex-row.justify-between.mb-4
+                    button#my-mute-btn.w-full.mr-2.bg-blue-600.text-white.rounded.text-xs.py-2.transition.duration-300(class="hover:bg-blue-500") 음소거
+                    button#my-camera-btn.w-full.bg-blue-600.text-white.rounded.text-xs.py-2.transition.duration-300(class="hover:bg-blue-500") 카메라 끄기
+                select#camera-list.outline-none.border.rounded.p-2.w-full.mb-2
                 span.self-start.text-xs.italic 메시지
                 div#chat-list.w-full.h-40.overflow-y-scroll.border.rounded.mb-2.p-2
                     ul
-                form.w-full.border.rounded.flex
-                    input.w-full.outline-none.p-2.mr-2(type="text", name="chat")
-                    button.bg-red-100.w-20.p-2.rounded 보내기
+                form#chat-form.w-full.border.rounded.flex
+                    input.w-full.outline-none.p-2.mr-2(type="text", name="chat", autocomplete="off")
+                    button.bg-blue-600.w-20.p-2.rounded.transition.duration-300.text-white.text-sm(class="hover:bg-blue-500") 보내기
 
 
         script(src="/socket.io/socket.io.js")
