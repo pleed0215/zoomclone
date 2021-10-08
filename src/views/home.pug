@@ -13,10 +13,10 @@ html(lang="en")
             form#enter-room__form.p-4.border.rounded.flex.flex-col.shadow-sm
                 div
                     label.text-sm(for="nickname") 닉네임
-                    input.w-full.p-2.border.rounded.outline-none.mb-2(name="nickname", type="text",  placeholder="닉네임을 입력해주세요.")
+                    input.w-full.p-2.border.rounded.outline-none.mb-2(id="nickname", name="nickname", type="text",  placeholder="닉네임을 입력해주세요.")
                 div
                     label.text-sm(for="room-name") 방이름
-                    input.w-full.p-2.border.rounded.outline-none.mb-2(name="room-name", type="text",  placeholder="방 이름을 입력해주세요.")
+                    input.w-full.p-2.border.rounded.outline-none.mb-2(id="room-name", name="room-name", type="text",  placeholder="방 이름을 입력해주세요.")
                 button(class="text-white w-full p-2 border rounded bg-blue-600 hover:bg-blue-500 transition duration-300") 방 들어가기
                 p#enter-room__message(class="italic text-red-700") &nbsp;
             div#container.flex.flex-col.items-center.hidden.border.rounded.w-full.p-4.shadow-lg
