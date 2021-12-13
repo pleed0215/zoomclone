@@ -2,7 +2,7 @@
   "name": "zoomclone_backend",
   "description": "Zoom Clone using WebRTC and WebSockets",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "homepage": "https://xenodochial-meitner-20e361.netlify.app",
   "scripts": {
