@@ -2,9 +2,9 @@
   "name": "zoomclone_backend",
   "description": "Zoom Clone using WebRTC and WebSockets",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "index.js",
   "license": "MIT",
-  "homepage": "https://xenodochial-meitner-20e361.netlify.app",
+  "homepage": "https://cryptic-reaches-35487.herokuapp.com/",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "build": "tsc -p .",
